@@ -26,11 +26,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-});
+mongoose.connect(
+    "mongodb+srv://megh-admin:"+process.env.PASSWORD+"@secretifymain.l7ncx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+    }
+);
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
