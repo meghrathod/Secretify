@@ -61,7 +61,8 @@ passport.use(
         {
             clientID: process.env.CLIENT_ID_GOOGLE,
             clientSecret: process.env.CLIENT_SECRET_GOOGLE,
-            callbackURL: "http://localhost:3000/auth/google/secrets",
+            callbackURL:
+                "https://guarded-retreat-73749.herokuapp.com/auth/google/secrets",
         },
         function (accessToken, refreshToken, profile, cb) {
             User.findOrCreate({ googleId: profile.id }, function (err, user) {
