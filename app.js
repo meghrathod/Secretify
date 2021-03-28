@@ -82,15 +82,13 @@ app.get("/", function (req, res) {
 
 app.get(
     "/auth/google",
-    passport.authenticate("google", { scope: ["email, profile"] })
+    passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
 app.get(
     "/auth/google/secrets",
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    function (req, res) {
-        res.redirect("/secrets");
-    }
+    passport.authenticate("google", { failureRedirect: "/login", successRedirect: "/secrets", scope:["email","profile"]}),
+
 );
 
 app.get("/secrets", function (req, res) {
