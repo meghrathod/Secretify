@@ -27,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(
-    "mongodb+srv://megh-admin:"+process.env.PASSWORD+"@secretifymain.l7ncx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    process.env.DATABASE,
     {
         useNewUrlParser: true,
         useFindAndModify: false,
@@ -156,17 +156,24 @@ app.get("/submit", function(req, res){
 });
 
 app.post("/submit", function (req, res) {
-    const submittedSecret = req.body.secret;
+    const submittedSecret = req.body.secret.trim();
 
     User.findById(req.user._id, function (err, foundUser) {
         if (err) {
             console.log(err);
         } else {
             if (foundUser) {
-                foundUser.secrets.push(submittedSecret);
-                foundUser.save(function () {
-                    res.redirect("/secrets");
-                });
+                if(submittedSecret!==''){
+                    foundUser.secrets.push(submittedSecret);
+                    foundUser.save(function () {
+                        res.redirect("/secrets");
+                    });
+                } else{
+                    res.redirect("/secrets")
+                }       
+            } else{
+                req.logout();
+                res.send("Internal Error Occured.");
             }
         }
     });
