@@ -65,10 +65,11 @@ passport.use(
             clientID: process.env.CLIENT_ID_GOOGLE,
             clientSecret: process.env.CLIENT_SECRET_GOOGLE,
             callbackURL:
-                "https://guarded-retreat-73749.herokuapp.com/auth/google/secrets",
+                "https://secretify.meghrathod.tech/auth/google/secrets",
         },
         function (accessToken, refreshToken, profile, cb) {
-            User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            console.log(profile);
+            User.findOrCreate({ googleId: profile.id, username: profile.emails[0].value}, function (err, user) {
                 return cb(err, user);
             });
         }
