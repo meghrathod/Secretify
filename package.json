@@ -23,7 +23,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node app.js"
   },
   "author": "Megh R.",
   "license": "ISC"
