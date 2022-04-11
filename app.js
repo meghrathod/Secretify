@@ -65,7 +65,7 @@ passport.use(
             clientID: process.env.CLIENT_ID_GOOGLE,
             clientSecret: process.env.CLIENT_SECRET_GOOGLE,
             callbackURL:
-                "https://secretify.meghrathod.tech/auth/google/secrets",
+                "https://secretify.meghrathod.dev/auth/google/secrets",
         },
         function (accessToken, refreshToken, profile, cb) {
             console.log(profile);
